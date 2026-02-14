@@ -1,0 +1,416 @@
+index.html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEGSTAY - Exclusive Property Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* PRIME PALET */
+            --bg-dark: #0f1115;       /* Çok koyu, neredeyse siyah zemin */
+            --bg-panel: #161920;      /* Kartlar için bir ton açık */
+            --gold-primary: #D4AF37;  /* Metalik Altın */
+            --gold-muted: #aa8c2c;    /* Koyu Altın */
+            --text-main: #f0f0f0;     /* Kirli beyaz */
+            --text-muted: #8892b0;    /* Soğuk gri */
+            --border-color: #2a2e38;  /* İnce çizgiler */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER & NAV */
+        header {
+            background: rgba(15, 17, 21, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1); /* Çok hafif altın çizgi */
+            padding: 1.2rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--gold-primary);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* DİL SEÇENEĞİ */
+        .lang-switch {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            letter-spacing: 1px;
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .lang-switch span.active {
+            color: var(--gold-primary);
+        }
+
+        .lang-switch:hover {
+            border-color: var(--gold-primary);
+        }
+
+        .cta-header {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            padding: 0.6rem 1.5rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s;
+        }
+
+        .cta-header:hover {
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 10rem 5%;
+            text-align: center;
+            background: radial-gradient(circle at top center, #1f232e 0%, var(--bg-dark) 70%);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff 20%, var(--gold-primary) 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+        }
+
+        /* SERVICES */
+        .services {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--bg-panel);
+            padding: 3rem 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--gold-primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            color: var(--gold-primary);
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* PRICING - EXCLUSIVE FEEL */
+        .pricing {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0a0b0e 100%);
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .price-box {
+            display: inline-block;
+            border: 1px solid var(--gold-primary);
+            padding: 4rem;
+            position: relative;
+            max-width: 600px;
+            background: rgba(22, 25, 32, 0.5);
+        }
+
+        .price-box::after {
+            content: 'EXCLUSIVE PARTNERSHIP';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            color: var(--gold-primary);
+            padding: 0 15px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+
+        .percent {
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            color: var(--text-main);
+            line-height: 1;
+            margin: 1.5rem 0;
+        }
+
+        .percent span {
+            font-size: 2rem;
+            color: var(--gold-primary);
+            vertical-align: super;
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            padding: 6rem 5%;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .contact-card {
+            background: var(--bg-panel);
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-card:hover {
+            border-color: var(--gold-primary);
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-value {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            transition: 0.3s;
+        }
+
+        .contact-value:hover {
+            color: var(--gold-primary);
+        }
+
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-right { gap: 1rem; }
+            .cta-header { display: none; } /* Mobilde butonu gizle, sade olsun */
+            .price-box { padding: 2rem; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">PEG<span>STAY</span></a>
+        
+        <div class="nav-right">
+            <div class="lang-switch">
+                <span class="active">TR</span> | <span>EN</span>
+            </div>
+            <a href="#contact" class="cta-header">Partner Olun</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Mülk Yönetiminde<br>Kusursuz Deneyim</h1>
+        <p>Global standartlarda ilan yönetimi ve dinamik gelir optimizasyonu ile mülkünüzün gerçek değerini ortaya çıkarın.</p>
+        <a href="#contact" style="color: var(--gold-primary); text-decoration: none; border-bottom: 1px solid var(--gold-primary); padding-bottom: 5px; font-size: 0.9rem;">DİJİTAL OFİSİMİZE ULAŞIN</a>
+    </section>
+
+    <section class="services">
+        <div class="section-title">
+            <h2>Hizmetlerimiz</h2>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="icon">✦</div>
+                <h3>Uçtan Uca Yönetim</h3>
+                <p>Airbnb ve Booking.com platformlarında, mülkünüzün A'dan Z'ye tüm dijital operasyonlarını profesyonelce yönetiyoruz.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📈</div>
+                <h3>Algoritmik Sıralama</h3>
+                <p>Platform algoritmalarına tam uyum sağlayarak, ilanlarınızın arama sonuçlarında en üst sıralarda yer almasını sağlıyoruz.</p>
+            </div>
+            <div class="card">
+                <div class="icon">💎</div>
+                <h3>Dinamik Fiyatlandırma</h3>
+                <p>Yapay zeka destekli analizlerle, talebe göre anlık fiyat güncellemeleri yaparak gelirinizi maksimize ediyoruz.</p>
+            </div>
+            <div class="card">
+                <div class="icon">💬</div>
+                <h3>Misafir İletişimi</h3>
+                <p>7/24 kesintisiz ve çok dilli iletişim desteği ile misafir memnuniyetini en üst seviyede tutuyoruz.</p>
+            </div>
+            <div class="card">
+                <div class="icon">⚖️</div>
+                <h3>Tazminat Yönetimi</h3>
+                <p>Olası hasar durumlarında tüm yasal ve sistemsel süreçleri sizin adınıza profesyonelce yürütüyoruz.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <div class="price-box">
+            <h3 style="color: var(--text-muted); font-size: 1rem; font-weight: 400; letter-spacing: 2px;">PERFORMANS ODAKLI MODEL</h3>
+            <div class="percent">15<span>%</span></div>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Hizmet Bedeli</p>
+            <p style="font-size: 0.9rem; color: #666; max-width: 400px; margin: 0 auto;">
+                Sabit ücret veya kurulum bedeli yoktur. Ödeme yalnızca rezervasyon gerçekleşip gelir elde edildiğinde alınır.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="section-title">
+            <h2>İletişim</h2>
+            <p>Contact Us</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <span class="contact-label">E-MAIL</span>
+                <a href="mailto:pelin@pegstay.com" class="contact-value">pelin@pegstay.com</a>
+            </div>
+
+            <div class="contact-card">
+                <span class="contact-label">TELEFON / WHATSAPP</span>
+                <a href="tel:+905453605878" class="contact-value">0545 360 58 78</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 PEGSTAY Management. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
